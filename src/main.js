@@ -9,6 +9,17 @@ import './css/main.css'
  * vuex
  * auto-import all modules and prepare shared store
  */
+
+import { register } from 'swiper/element/bundle';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import "swiper/css/effect-coverflow";
+// register Swiper custom elements
+register();
+
+
+
 const vuexModules = require.context('./vue/store/', true, /\.js$/)
 const modules = {}
 

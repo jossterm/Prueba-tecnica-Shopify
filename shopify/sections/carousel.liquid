@@ -1,0 +1,52 @@
+{% comment %}
+  En este archivo inserto un componente de Vue para usar la libreria Swiper.js para 
+  crear el carrusel de imagenes
+{% endcomment %}
+<banner-carrusel>
+ 
+<swiper-container
+  :space-between="30"
+  :slides-per-view="1"
+  :pagination="true"
+  class="w-full h-[20vh]">
+
+  {% comment %}
+    Las siguientes lienas son un bucle for que recorre cada bloque en la seccion actual en este
+    caso las imagenes del carrusel, los bloques y el maximo de bloques esta definidos en schema.
+  {% endcomment %}
+  {% for block in section.blocks %}
+    {% if block.type == 'carousel' %}
+
+      <swiper-slide>
+        <img
+        class="w-100"
+        src="{{ block.settings.image | image_url: width: 3000 }}"/>
+      </swiper-slide>
+
+  {% endif %}
+{% endfor %}
+</swiper-container>
+
+</banner-carrusel>
+
+{% schema %}
+  {
+    "name": "Slides Banner for Show",
+    "max_blocks": 3,
+    "settings": [
+    ],
+    "blocks": [
+      {
+        "type": "carousel",
+        "name": "Image slide",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

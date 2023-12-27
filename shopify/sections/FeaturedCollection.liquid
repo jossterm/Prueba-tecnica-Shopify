@@ -1,0 +1,49 @@
+{% comment %}
+  Esta linea crea una variable llamada products que contiene todos los productos de la tienda, luego los productos se ordenan por fecha de creacion y se invierte el orden para que los productos mas recientes aparezcan primero
+{% endcomment %}
+{% assign products = collections.all.products | sort: 'created_at' | reverse %}
+{% comment %}
+  Esta linea crea una variable llamada featured_products que contiene los primeros 6 productos de la lista products
+{% endcomment %}
+{% assign featured_products = products | slice: 0, 6 %}
+{% comment %}
+  Esta linea verifica si hay productos en la lista featured_products
+{% endcomment %}
+ {% if featured_products.size > 0 %}
+  <section>
+    <h2 style="text-align: center; font-size: 30px; font-family: Georgia, serif;">{{ section.settings.title }}</h2>
+    <ul class="flex">
+      {% comment %}
+        Esta linea comienza un bucle que recorre cada producto en la lista featured_products
+        En las lineas siguientes lineas comienzo a usar liquid tags para mostrar la informacion de products
+      {% endcomment %}
+      {% for product in featured_products %}
+        <li>
+          <a href="{{ product.url }}">
+            <img src="{{ product.featured_image.src | img_url: '300x' }}" alt="{{ product.featured_image.alt }}">
+            <h3>{{ product.title }}</h3>
+            <p>{{ product.price | money }}</p>
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  </section>
+{% endif %} 
+{% comment %}
+  La funcionalidad arrastar y soltar esta disponible para todas las secciones en el editor de shopify,
+  no agregue nada al codigo para usarla
+{% endcomment %}
+
+{% schema %}
+  {
+    "name": "FeaturedCollection",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Titulo",
+        "default": "Productos destacados"
+      }
+    ]
+  }
+  {% endschema %}

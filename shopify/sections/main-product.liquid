@@ -1,0 +1,29 @@
+<div style="display: flex; flex-direction: row;">
+  <div class="product-image">
+    <img src="{{ product.featured_image | img_url: 'large' }}" alt="{{ product.title }}">
+  </div>
+  <div style="margin-top: 20px;">
+    <div style="font-size: 25px; font-family: Georgia, serif; padding-left: 85px;">
+      <h2>{{ product.title }}</h2>
+      <p>{{ product.description }}</p>
+    </div>
+    <div style="font-size: 25px; font-family: Georgia, serif; padding-left: 85px;">
+      <p>Precio: ${{ product.price }}</p>
+    </div>
+
+    <form action="/cart/add" method="post">
+    <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+    <button type="submit" style="margin-bottom:25px; font-size: 25px; font-family: Georgia, serif; border: solid; margin-left: 87px;">
+    Agregar al carrito
+    </button>
+    </form>
+
+    {% if product.metafields.gift_note %}
+      <div  style="font-size: 25px; font-family: Georgia, serif; padding-left: 95px;">
+        <h3>Agrega una nota de regalo <br> para este producto:</h3>
+        <textarea style="border: solid;" id="note" rows="3"></textarea>
+      </div>
+    {% endif %}
+  </div>
+
+</div>

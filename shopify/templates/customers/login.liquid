@@ -1,0 +1,15 @@
+<div style="height: 50vh;">
+<h2 style="margin-bottom:25px; font-size: 25px; font-family: Georgia, serif;">Login</h2>
+{% form 'customer_login', id: 'customer_login' %}
+    <label style="margin-bottom:25px; font-size: 25px; font-family: Georgia, serif;" for="customer_email">{{ 'Email' }} </label>
+    <input type="email" name="customer[email]" id="customer_email" autocorrect="off" autocapitalize="off" autofocus>
+  
+    <label style="margin-bottom:25px; font-size: 25px; font-family: Georgia, serif;" for="customer_password">{{ 'Password' }}</label>
+    <input type="password" value="" name="customer[password]" id="customer_password">
+  
+    <p style="margin-bottom:25px; font-size: 25px; font-family: Georgia, serif;">
+      <input type="submit" value="{{ 'Sign In'}}">
+      <a href="{{ route('password.reset') }}">{{ 'Forgot Password'}}</a>
+    </p>
+{% endform %}
+</div>

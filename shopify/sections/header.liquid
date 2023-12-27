@@ -1,27 +1,48 @@
-<div class="container">
-  <a href="{{ routes.root_url }}">
-    Logo
+<div style="display: flex; flex-direction: row; justify-content:flex-start; align-items: center;
+background: #F4F4F4 0% 0% no-repeat padding-box; opacity: 1;">
+
+  <div style="width: 23vw; display: flex; justify-content: center; align-items: center; padding-left: 5vw;">
+      <a href="{{ routes.root_url }}" style="width: 10vw; height: auto;">
+        {{ 'logo.static.jpg' | asset_url | img_tag: 'Logo' }}
+      </a>
+  </div>
+
+  <nav style="height: 100%; text-align: right; float: right;">
+    <div style="display:flex; justify-content: space-between;">
+
+      {% comment %}
+       Las siguientes lineas son bucle for que recorre cada enlace en la lista de enlaces main-menu
+      {% endcomment %}
+      {% for link in linklists.main-menu.links %}
+              <div class="hover:underline" style="color: black; font-size: 1.5vw; font-family: Bahnschrift; padding-left:6vh;">
+                    <a href="{{ link.url }}">
+                    {{ link.title }}
+                  </a>
+              </div>
+         {% endfor %}
+
+    </div>  
+  </nav>
+
+
+  <div style="display: flex; padding-right: 1vw; width: 15vw;">
+
+  {% comment %}
+    En la siguiente linea se establece la url del href de acuerdo a la condicion, si el cliente
+    esta logueado redirecciona a la pagina de cuenta, si no a la pagina de login.
+  {% endcomment %}
+
+  <a href="{% if customer %}{{ routes.account_url }}{% else %}{{ routes.account_login_url }}{% endif %}" class="w-[2.4rem]" style="margin-left: 120px;">
+    {{ 'bx-face.static.svg' | asset_url | img_tag: 'Logo' }}
   </a>
 
-  {% render 'layout-menu' %}
-
-  <div>
-    {% if shop.customer_accounts_enabled %}
-      {% if customer %}
-        <a href="{{ routes.account_url }}">
-          {{ 'action.account' | t }}
-        </a>
-        {{ 'action.log_out' | t | customer_logout_link }}
-      {% else %}
-        {{ 'action.log_in' | t | customer_login_link }}
-        {{ 'action.register' | t | customer_register_link }}
-      {% endif %}
-    {% endif %}
-
-    <a href="{{ routes.cart_url }}">
-      {{ 'action.cart' | t }}
-    </a>
+    <a href="{{ routes.cart_url }}" class="{{ link_class }} relative w-[2.4rem]">
+        {{ 'bx-shopping-bag.static.svg' | asset_url | img_tag: 'Logo' }}
+      </a>
   </div>
+
+</div>
+
 </div>
 
 {% schema %}

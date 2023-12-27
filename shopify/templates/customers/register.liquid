@@ -1,0 +1,12 @@
+{% form 'customer_login', id: 'customer_login' %}
+    <label for="customer_email">{{ 'Hola' }}</label>
+    <input type="email" name="customer[email]" id="customer_email" autocorrect="off" autocapitalize="off" autofocus>
+  
+    <label for="customer_password">{{ 'customer.login.password' | t }}</label>
+    <input type="password" value="" name="customer[password]" id="customer_password">
+  
+    <p>
+      <input type="submit" value="{{ 'customer.login.sign_in' | t }}">
+      <a href="{{ route('password.reset') }}">{{ 'customer.login.forgot_password' | t }}</a>
+    </p>
+{% endform %}

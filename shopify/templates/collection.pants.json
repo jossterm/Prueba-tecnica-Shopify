@@ -1,0 +1,10 @@
+{
+    "sections": {
+      "pants-collection": {
+        "type": "pants-collection"
+      }
+    },
+    "order": [
+      "pants-collection"
+    ]
+}

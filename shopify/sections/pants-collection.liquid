@@ -1,0 +1,35 @@
+
+{% comment %}
+   Este codigo paginación que muestra los productos de la colección ‘Pantalones’ 
+   en filas de cuatro productos
+{% endcomment %}
+
+{% paginate collections['Pantalones'].products by 4 %} 
+  <h2 style="text-align: center; font-size: 30px; font-family: Georgia, serif;">{{ section.settings.title }}</h2>
+  <div style="display: flex; justify-content: space-around;">  
+    {% for product in collections['Pantalones'].products %}
+      <div>
+        <a href="{{ product.url }}">
+          <img src="{{ product.featured_image.src | img_url: 'medium' }}" alt="{{ product.featured_image.alt | escape }}">
+          <h3>{{ product.title }}</h3>
+          <p>{{ product.price | money }}</p>
+        </a>
+      </div>
+    {% endfor %}
+  </div>
+{% endpaginate %}   
+
+ 
+{% schema %}
+  {
+    "name": "Pants",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Titulo",
+        "default": "Pantalones"
+      }
+    ]
+  }
+  {% endschema %}
